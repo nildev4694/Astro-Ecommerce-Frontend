@@ -12,8 +12,11 @@ export interface Props {
 }
 
 //request
-const request = await fetch('http://localhost/bagisto_test/public/api/v1/products');
-const data = await request.json();
+// const request = await fetch('http://localhost/bagisto_test/public/api/v1/products');
+// const data = await request.json();
+// const productData = data.data;
+
+import data from '../../public/products_data.json';
 const productData = data.data;
 
 ---
