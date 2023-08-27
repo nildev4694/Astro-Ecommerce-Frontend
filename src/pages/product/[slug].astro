@@ -1,22 +1,27 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import initialData from '../../../public/products_data.json';
 
 export async function getStaticPaths() {
-  const initialUrl = 'http://localhost/bagisto_test/public/api/v1/products';
-  const initialRequest = await fetch(initialUrl);
-  const initialData = await initialRequest.json();
-  const productsData = initialData.data;
+    //   const initialUrl = 'http://localhost/bagisto_test/public/api/v1/products';
+    //   const initialRequest = await fetch(initialUrl);
+    //   const initialData = await initialRequest.json();
+    //   const productsData = initialData.data;
+    
+    
 
-  const lastPage = initialData.meta.last_page;
-  const urlLinks = initialData.meta.links.url;
+    const productsData = initialData.data;
+
+//   const lastPage = initialData.meta.last_page;
+//   const urlLinks = initialData.meta.links.url;
 
   // Fetch data from all pagination URLs
-  for (let page = 2; page <= lastPage; page++) {
-    const pageUrl = `${initialUrl}?page=${page}`;
-    const pageRequest = await fetch(pageUrl);
-    const pageData = await pageRequest.json();
-    productsData.push(...pageData.data);
-  }
+//   for (let page = 2; page <= lastPage; page++) {
+//     const pageUrl = `${initialUrl}?page=${page}`;
+//     const pageRequest = await fetch(pageUrl);
+//     const pageData = await pageRequest.json();
+//     productsData.push(...pageData.data);
+//   }
 
   return productsData.map((product:any) => {
     return {
