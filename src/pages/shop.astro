@@ -1,0 +1,39 @@
+---
+//imports
+import MainLayout from "../layouts/MainLayout.astro";
+import ProductCards from "../components/ProductCards.astro";
+
+export interface Props {
+    // ProductCards: any
+    name: string
+    url_key: string
+    all_images?: {}
+    image?: string
+}
+
+//request
+const request = await fetch('http://localhost/bagisto_test/public/api/v1/products');
+const data = await request.json();
+const productData = data.data;
+
+---
+
+<MainLayout>
+	<div class="flex flex-col pb-10">
+		<h2 class="block font-semibold text-gray-800 py-10 text-lg md:text-2xl lg:text-4xl dark:text-gray-200">
+			All Products
+		</h2> 
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere porro fugiat, iusto adipisci aperiam deleniti corporis numquam labore rem iure dolor at velit magni alias provident explicabo? Illum, voluptatem corrupti!</p>
+	</div>
+	<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+		{productData.map((product: any) => 
+					(<div>
+						<ProductCards 
+							name={product.name}
+							url_key={product.url_key}
+							image={product.base_image.medium_image_url}
+						/>
+					</div>)
+		)}
+	</div>
+</MainLayout>
